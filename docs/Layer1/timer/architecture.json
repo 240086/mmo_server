@@ -1,0 +1,31 @@
+{
+    "name": "Layer1/timer/architecture.json",
+    "module": "timer",
+    "threading_model": {
+        "schedule": "MPSC",
+        "dispatch": "single-thread",
+        "callback_execution": "runtime-owned-thread"
+    },
+    "determinism": {
+        "guaranteed_ordering": true,
+        "clock_source": "steady_clock",
+        "stable_ordering": true,
+        "same_deadline_fifo": true,
+        "cross_thread_callback_execution": false
+    },
+    "performance": {
+        "insert_complexity": "O(log n)",
+        "dispatch_complexity": "O(k)",
+        "target_tick_precision_ms": 1
+    },
+    "future_evolution": {
+        "timer_backend": [
+            "min_heap",
+            "hierarchical_timing_wheel"
+        ]
+    },
+    "ownership": {
+        "runtime_owns_dispatch": true,
+        "timer_queue_owns_tasks": true
+    }
+}

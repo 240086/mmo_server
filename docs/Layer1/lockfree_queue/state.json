@@ -1,0 +1,21 @@
+{
+    "name": "Layer1/lockfree_queue/state.json",
+    "module": "lockfree_queue",
+    "overall_status": "architecture_phase",
+    "progress": {
+        "architecture": "coding",
+        "behavior_contracts": "coding",
+        "interfaces": "pending",
+        "implementation_v1": "pending",
+        "runtime_validation": "pending"
+    },
+    "files": {},
+    "technical_debt": [],
+    "known_risks": [
+        {
+            "id": "QUEUE-001",
+            "description": "ABA issues not addressed in v1."
+        }
+    ],
+    "behavior_contracts": "/home/xj/projects/mmo_server/docs/Layer1/lockfree_queue/behavior.md"
+}

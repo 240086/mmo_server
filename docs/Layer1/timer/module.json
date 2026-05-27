@@ -1,0 +1,22 @@
+{
+    "name": "Layer1/timer/module.json",
+    "module": "timer",
+    "layer": "Layer1",
+    "namespace": "mmo::infrastructure::timer",
+    "responsibilities": [
+        "high precision monotonic clock",
+        "timer scheduling",
+        "deadline management"
+    ],
+    "non_responsibilities": [
+        "runtime tick synchronization",
+        "scene update scheduling"
+    ],
+    "dependencies": [
+        "logger"
+    ],
+    "used_by": [
+        "runtime/tick",
+        "runtime/pipeline"
+    ]
+}
