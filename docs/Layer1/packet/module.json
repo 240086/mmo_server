@@ -1,0 +1,24 @@
+{
+    "name": "Layer1/lockfree_queue/module.json",
+    "module": "lockfree_queue",
+    "layer": "Layer1",
+    "namespace": "mmo::infrastructure::lockfree_queue",
+    "responsibilities": [
+        "multi-producer message transport",
+        "single-consumer message delivery",
+        "lock-free runtime ingress queue"
+    ],
+    "non_responsibilities": [
+        "runtime scheduling",
+        "message serialization",
+        "global ordering",
+        "task execution"
+    ],
+    "dependencies": [],
+    "used_by": [
+        "runtime/tick",
+        "runtime/pipeline",
+        "distributed/gateway",
+        "distributed/rpc"
+    ]
+}

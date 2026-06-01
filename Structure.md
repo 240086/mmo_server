@@ -28,6 +28,17 @@ mmo_server
 │  ├─ Structure.md
 │  ├─ infrastructure
 │  │  ├─ CMakeLists.txt
+│  │  ├─ lockfree_queue
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ infrastructure
+│  │  │  │        └─ lockfree_queue
+│  │  │  │           ├─ CacheAligned.hpp
+│  │  │  │           ├─ MPSCQueue.hpp
+│  │  │  │           ├─ QueueSlot.hpp
+│  │  │  │           └─ QueueTypes.hpp
+│  │  │  └─ src
 │  │  ├─ logger
 │  │  │  ├─ CMakeLists.txt
 │  │  │  ├─ include

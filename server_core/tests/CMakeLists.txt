@@ -7,3 +7,4 @@ cmake_minimum_required(VERSION 3.20)
 
 # 向下路由到具体的业务测试目录
 add_subdirectory(runtime/timer)
+add_subdirectory(infrastructure/lockfree_queue)
