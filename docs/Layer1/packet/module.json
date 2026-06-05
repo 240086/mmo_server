@@ -1,24 +1,26 @@
 {
-    "name": "Layer1/lockfree_queue/module.json",
-    "module": "lockfree_queue",
+    "name": "Layer1/packet/architecture.json",
+    "module": "packet",
     "layer": "Layer1",
-    "namespace": "mmo::infrastructure::lockfree_queue",
+    "namespace": "mmo::infrastructure::packet",
     "responsibilities": [
-        "multi-producer message transport",
-        "single-consumer message delivery",
-        "lock-free runtime ingress queue"
+        "packet buffer management",
+        "binary message representation",
+        "packet reading",
+        "packet writing",
+        "packet metadata"
     ],
     "non_responsibilities": [
-        "runtime scheduling",
-        "message serialization",
-        "global ordering",
-        "task execution"
+        "socket io",
+        "rpc routing",
+        "business protocol",
+        "gameplay messages"
     ],
     "dependencies": [],
     "used_by": [
-        "runtime/tick",
-        "runtime/pipeline",
-        "distributed/gateway",
-        "distributed/rpc"
+        "net",
+        "serialization",
+        "runtime",
+        "gateway"
     ]
 }

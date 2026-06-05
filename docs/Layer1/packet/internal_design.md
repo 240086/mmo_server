@@ -1,35 +1,71 @@
-<!-- /home/xj/projects/mmo_server/docs/Layer1/lockfree_queue/internal_design.md -->
-1. Queue Backend
-# Queue Backend
+<!-- /home/xj/projects/mmo_server/docs/Layer1/packet/internal_design.md -->
+# Packet Backend
 
-Current implementation:
-- bounded MPSC ring buffer
+PacketBuffer uses contiguous memory.
 
-Reason:
-- cache locality
-- predictable memory layout
-- no heap allocation during enqueue
-2. False Sharing Prevention
-# False Sharing Prevention
+Current backend:
 
-Producer and consumer indices are cache-line separated.
+std::vector<std::byte>
 
-Alignment target:
-- 64-byte cache line
-3. Atomic Semantics
-# Atomic Semantics
+Future backend:
 
-Producer writes:
-- release semantics
+memory_pool_allocation
 
-Consumer reads:
-- acquire semantics
-4. Overflow Policy
-# Overflow Policy
+# Header Layout
 
-The queue is bounded.
+PacketHeader is fixed size.
 
-When full:
-- enqueue fails immediately
+Header fields:
 
-The queue never blocks producer threads.
+opcode
+payload_size
+sequence
+flags
+
+# Reader Design
+
+PacketReader is cursor-based.
+
+Read operations advance cursor.
+
+Bounds checking is mandatory.
+
+# Writer Design
+
+PacketWriter is cursor-based.
+
+Write operations advance cursor.
+
+Capacity validation is mandatory.
+
+# PacketView
+
+PacketView is lightweight.
+
+PacketView owns no memory.
+
+PacketView supports zero-copy inspection.
+
+# Endian Contract
+
+V1:
+
+All packet fields are encoded as little-endian.
+
+Cross-endian communication is not supported.
+
+Future versions may introduce explicit endian conversion utilities.
+
+PacketReader and PacketWriter do not perform automatic conversion.
+
+# Future RPC Compatibility
+
+PacketHeader is transport stable.
+
+PacketHeader layout must remain backward compatible.
+
+New metadata fields must be appended.
+
+Existing fields must never change meaning.
+
+Packet payload remains opaque to transport layer.

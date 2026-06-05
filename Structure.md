@@ -6,9 +6,21 @@ mmo_server
 ├─ client
 ├─ docs
 │  ├─ Layer1
+│  │  ├─ MemoryPool
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
 │  │  ├─ architecture.md
 │  │  ├─ index.json
 │  │  ├─ lockfree_queue
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
+│  │  ├─ packet
 │  │  │  ├─ architecture.json
 │  │  │  ├─ behavior.md
 │  │  │  ├─ internal_design.md
@@ -46,6 +58,25 @@ mmo_server
 │  │  │  │     └─ infrastructure
 │  │  │  │        └─ logger
 │  │  │  └─ src
+│  │  ├─ packet
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ infrastructure
+│  │  │  │        └─ packet
+│  │  │  │           ├─ PacketBuffer.hpp
+│  │  │  │           ├─ PacketConstants.hpp
+│  │  │  │           ├─ PacketFlags.hpp
+│  │  │  │           ├─ PacketHeader.hpp
+│  │  │  │           ├─ PacketReader.hpp
+│  │  │  │           ├─ PacketTypes.hpp
+│  │  │  │           ├─ PacketView.hpp
+│  │  │  │           └─ PacketWriter.hpp
+│  │  │  └─ src
+│  │  │     ├─ PacketBuffer.cpp
+│  │  │     ├─ PacketReader.cpp
+│  │  │     ├─ PacketView.cpp
+│  │  │     └─ PacketWriter.cpp
 │  │  └─ timer
 │  │     ├─ CMakeLists.txt
 │  │     ├─ include
@@ -64,6 +95,29 @@ mmo_server
 │  │  └─ CMakeLists.txt
 │  └─ tests
 │     ├─ CMakeLists.txt
+│     ├─ infrastructure
+│     │  ├─ lockfree_queue
+│     │  │  ├─ CMakeLists.txt
+│     │  │  ├─ ConsumerStarvationTests.cpp
+│     │  │  ├─ FIFOOrderTests.cpp
+│     │  │  ├─ FalseSharingPressureTests.cpp
+│     │  │  ├─ FullQueueTests.cpp
+│     │  │  ├─ LargePayloadTests.cpp
+│     │  │  ├─ LongDurationStabilityTests.cpp
+│     │  │  ├─ MultiProducerCorrectnessTests.cpp
+│     │  │  ├─ ProducerBurstTests.cpp
+│     │  │  ├─ StressTests.cpp
+│     │  │  └─ WrapAroundTests.cpp
+│     │  └─ packet
+│     │     ├─ CMakeLists.txt
+│     │     ├─ PacketBoundaryTests.cpp
+│     │     ├─ PacketBufferTests.cpp
+│     │     ├─ PacketHeaderLayoutTests.cpp
+│     │     ├─ PacketLargePayloadTests.cpp
+│     │     ├─ PacketReaderTests.cpp
+│     │     ├─ PacketRoundTripTests.cpp
+│     │     ├─ PacketViewTests.cpp
+│     │     └─ PacketWriterTests.cpp
 │     └─ runtime
 │        └─ timer
 │           ├─ CMakeLists.txt

@@ -1,29 +1,30 @@
 {
-    "name": "Layer1/lockfree_queue/architecture.json",
-    "module": "lockfree_queue",
+    "name": "Layer1/packet/architecture.json",
+    "module": "packet",
     "threading_model": {
-        "enqueue": "multi-producer",
-        "dequeue": "single-consumer",
-        "memory_model": "lock-free"
+        "writer": "single-owner",
+        "reader": "single-owner",
+        "cross_thread_access": false
     },
-    "determinism": {
-        "single_consumer_ordering": true,
-        "cross_producer_global_ordering": false,
-        "per_producer_fifo": true
+    "ownership_model": {
+        "packet_buffer": "unique_owner",
+        "packet_view": "non_owning"
     },
+    "design_principles": [
+        "zero_copy_view",
+        "explicit_ownership",
+        "binary_transport_only",
+        "no_network_logic",
+        "no_gameplay_logic"
+    ],
     "performance": {
-        "target_contention": "high",
-        "enqueue_complexity": "O(1)",
-        "dequeue_complexity": "O(1)"
-    },
-    "ownership": {
-        "producer_owns_message_before_enqueue": true,
-        "consumer_owns_message_after_dequeue": true
+        "heap_allocations": "minimized",
+        "copy_policy": "explicit",
+        "packet_header_fixed_size": true
     },
     "future_evolution": {
-        "queue_backend": [
-            "mpsc_ring_buffer",
-            "intrusive_node_queue"
-        ]
+        "compression": true,
+        "encryption": true,
+        "scatter_gather_io": true
     }
 }

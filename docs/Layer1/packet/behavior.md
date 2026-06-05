@@ -1,71 +1,80 @@
-<!-- /home/xj/projects/mmo_server/docs/Layer1/lockfree_queue/behavior.md -->
-Design Philosophy
+<!-- /home/xj/projects/mmo_server/docs/Layer1/packet/behavior.md -->
 # Design Philosophy
 
-The queue is designed as the primary ingress transport
-mechanism for MMO runtime message delivery.
+Packet is the canonical binary transport unit
+within the MMO runtime.
 
-The queue prioritizes:
-- predictable ownership
-- low contention
-- stable runtime delivery
+Packet is transport-oriented.
 
-over strict global ordering guarantees.
-Threading Semantics
-# Threading Semantics
+Packet is not gameplay-oriented.
 
-The queue supports:
-- multiple concurrent producers
-- exactly one consumer
+# Ownership Contract
 
-The consumer thread exclusively owns dequeued messages.
-Ordering Guarantees
-# Ordering Guarantees
+PacketBuffer is the sole owner of packet memory.
 
-The queue guarantees FIFO ordering per producer thread.
+PacketView is a non-owning borrowed view.
 
-Global ordering across producers is not guaranteed.
-Memory Ownership
-# Memory Ownership
+PacketReader borrows PacketView.
 
-Before enqueue:
-- producer owns message
+PacketWriter borrows PacketBuffer.
 
-After successful enqueue:
-- queue owns message
+Ownership is never transferred implicitly.
 
-After dequeue:
-- consumer owns message
-Runtime Philosophy
-# Runtime Philosophy
+Move operations preserve ownership.
 
-The queue is not responsible for simulation determinism.
+Copy operations duplicate payload explicitly.
 
-Deterministic runtime ordering is established
-at the runtime tick layer.
+# Read Contract
 
-# Queue Contract
-The queue guarantees:
+PacketReader never mutates data.
 
-- MPSC safety
-- single-consumer ownership
-- per-producer FIFO ordering
+PacketReader never reads beyond payload boundary.
 
-The queue does NOT guarantee:
+# Write Contract
 
-- global producer ordering
-- blocking semantics
-- dynamic growth
+PacketWriter never writes beyond capacity.
 
-# Memory Contract
-Producer publish:
-- release semantics
+PacketWriter advances write position only after successful write.
 
-Consumer acquire:
-- acquire semantics
+# Runtime Contract
 
-The queue never exposes partially written elements.
+Packet does not perform networking.
+
+Packet does not perform serialization policy decisions.
+
+Packet only exposes binary transport primitives.
 
 # Invalid Usage
-The same object instance must not be accessed
-concurrently after ownership transfer.
+
+PacketView must not outlive PacketBuffer.
+
+Concurrent writes are forbidden.
+
+Concurrent reads and writes are forbidden.
+
+# Lifetime Contract
+
+PacketView must not outlive PacketBuffer.
+
+PacketReader must not outlive PacketView.
+
+PacketWriter must not outlive PacketBuffer.
+
+Destroying the owner invalidates all dependent views.
+
+No reference stability is guaranteed after Resize().
+
+# Serialization Contract
+
+Packet only stores bytes.
+
+Packet does not interpret payload semantics.
+
+Serialization layer defines:
+
+- field order
+- string encoding
+- container encoding
+- schema evolution
+
+Packet remains serialization agnostic.

@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.20)
 # 🚀 职责：收拢并驱动所有的 L1 基础设施子模块
 add_subdirectory(timer)
 add_subdirectory(lockfree_queue)
+add_subdirectory(packet)
+
 
 # 💡 未来扩展边界：当推进日志、网络模块时，直接加在这里：
 # add_subdirectory(logger)
@@ -14,4 +16,5 @@ add_library(mmo_infrastructure INTERFACE)
 target_link_libraries(mmo_infrastructure INTERFACE 
     mmo_timer
     mmo_lockfree_queue
+    mmo_packet
 )

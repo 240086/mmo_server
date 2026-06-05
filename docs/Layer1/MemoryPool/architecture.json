@@ -1,0 +1,38 @@
+{
+    "name": "Layer1/MemoryPool/architecture.json",
+    "module": "memory_pool",
+    "layer": "Layer1",
+    "status": "architecture_phase",
+    "responsibility": [
+        "Fixed-size memory allocation",
+        "Memory reuse",
+        "Allocation statistics",
+        "Allocation ownership tracking"
+    ],
+    "non_responsibility": [
+        "Object lifetime management",
+        "Serialization",
+        "Garbage collection",
+        "Reference counting",
+        "Container allocation"
+    ],
+    "dependencies": [],
+    "consumers": [
+        "packet",
+        "net",
+        "event_bus",
+        "runtime",
+        "simulation"
+    ],
+    "v1_scope": [
+        "FixedBlockPool",
+        "MemoryBlock",
+        "PoolStatistics"
+    ],
+    "future_scope": [
+        "SlabAllocator",
+        "ArenaAllocator",
+        "NUMAAwareAllocator",
+        "HugePageAllocator"
+    ]
+}

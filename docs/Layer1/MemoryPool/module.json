@@ -1,0 +1,13 @@
+{
+    "module": "memory_pool",
+    "version": "1.0",
+    "layer": "Layer1",
+    "priority": "critical",
+    "depends_on": [],
+    "used_by": [
+        "packet",
+        "net",
+        "runtime"
+    ],
+    "status": "architecture_phase"
+}
