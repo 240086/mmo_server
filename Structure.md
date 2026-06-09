@@ -58,6 +58,18 @@ mmo_server
 │  │  │  │     └─ infrastructure
 │  │  │  │        └─ logger
 │  │  │  └─ src
+│  │  ├─ memory_pool
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ infrastructure
+│  │  │  │        └─ memory_pool
+│  │  │  │           ├─ FixedBlockPool.hpp
+│  │  │  │           ├─ IMemoryPool.hpp
+│  │  │  │           ├─ MemoryBlock.hpp
+│  │  │  │           └─ MemoryPoolTypes.hpp
+│  │  │  └─ src
+│  │  │     └─ FixedBlockPool.cpp
 │  │  ├─ packet
 │  │  │  ├─ CMakeLists.txt
 │  │  │  ├─ include
@@ -108,6 +120,9 @@ mmo_server
 │     │  │  ├─ ProducerBurstTests.cpp
 │     │  │  ├─ StressTests.cpp
 │     │  │  └─ WrapAroundTests.cpp
+│     │  ├─ memory_pool
+│     │  │  ├─ CMakeLists.txt
+│     │  │  └─ FixedBlockPoolTests.cpp
 │     │  └─ packet
 │     │     ├─ CMakeLists.txt
 │     │     ├─ PacketBoundaryTests.cpp

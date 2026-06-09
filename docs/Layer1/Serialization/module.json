@@ -1,0 +1,15 @@
+{
+    "module": "serialization",
+    "layer": "Layer1",
+    "version": "1.0",
+    "status": "architecture_phase",
+    "depends_on": [
+        "packet"
+    ],
+    "used_by": [
+        "event_bus",
+        "net",
+        "rpc",
+        "simulation"
+    ]
+}

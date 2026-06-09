@@ -2,6 +2,7 @@
 #pragma once
 
 #include <cstddef>
+#include <type_traits>
 
 namespace mmo::infrastructure::memory_pool
 {
@@ -23,4 +24,7 @@ namespace mmo::infrastructure::memory_pool
             size = 0;
         }
     }; // 刚好 16 字节，完美命中两枚 CPU 寄存器，全速传递！
+
+    static_assert(std::is_trivially_copyable_v<MemoryBlock>, "MemoryBlock must be trivially copyable for ultra-fast register passing.");
+    static_assert(std::is_standard_layout_v<MemoryBlock>, "MemoryBlock must maintain a standard layout to ensure cross-subsystem binary compatibility.");
 }

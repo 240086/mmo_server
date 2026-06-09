@@ -1,0 +1,47 @@
+{
+    "name": "Layer1/Serialization/architecture.json",
+    "module": "serialization",
+    "layer": "Layer1",
+    "status": "architecture_phase",
+    "responsibility": [
+        "Binary serialization",
+        "Binary deserialization",
+        "Primitive type encoding",
+        "String encoding",
+        "Protocol consistency",
+        "Deterministic encoding"
+    ],
+    "non_responsibility": [
+        "Compression",
+        "Encryption",
+        "Network transport",
+        "Object lifetime management",
+        "Reflection system"
+    ],
+    "dependencies": [
+        "packet"
+    ],
+    "consumers": [
+        "event_bus",
+        "net",
+        "rpc",
+        "db_agent",
+        "redis_proxy",
+        "simulation",
+        "runtime"
+    ],
+    "v1_scope": [
+        "BinaryWriter",
+        "BinaryReader",
+        "SerializationTraits",
+        "PrimitiveSerializer",
+        "StringSerializer"
+    ],
+    "future_scope": [
+        "ContainerSerializer",
+        "VersionedSerializer",
+        "ReflectionSerializer",
+        "SchemaEvolution",
+        "ContainerSerializer"
+    ]
+}
