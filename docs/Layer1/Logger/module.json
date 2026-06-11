@@ -1,0 +1,13 @@
+{
+    "name": "logger",
+    "layer": "Layer1",
+    "category": "core_infrastructure",
+    "priority": "critical",
+    "status": "design",
+    "owner": "server_core",
+    "stability_target": "frozen_v1",
+    "architecture_document": "architecture.json",
+    "behavior_document": "behavior.md",
+    "internal_design_document": "internal_design.md",
+    "state_document": "state.json"
+}

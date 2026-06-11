@@ -12,6 +12,12 @@ mmo_server
 │  │  │  ├─ internal_design.md
 │  │  │  ├─ module.json
 │  │  │  └─ state.json
+│  │  ├─ Serialization
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
 │  │  ├─ architecture.md
 │  │  ├─ index.json
 │  │  ├─ lockfree_queue
@@ -89,6 +95,24 @@ mmo_server
 │  │  │     ├─ PacketReader.cpp
 │  │  │     ├─ PacketView.cpp
 │  │  │     └─ PacketWriter.cpp
+│  │  ├─ serialization
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ infrastructure
+│  │  │  │        └─ serialization
+│  │  │  │           ├─ BinaryReader.hpp
+│  │  │  │           ├─ BinaryWriter.hpp
+│  │  │  │           ├─ PrimitiveSerializer.hpp
+│  │  │  │           ├─ SerializationConstants.hpp
+│  │  │  │           ├─ SerializationError.hpp
+│  │  │  │           ├─ SerializationTraits.hpp
+│  │  │  │           ├─ SerializationTypes.hpp
+│  │  │  │           └─ StringSerializer.hpp
+│  │  │  └─ src
+│  │  │     ├─ BinaryReader.cpp
+│  │  │     ├─ BinaryWriter.cpp
+│  │  │     └─ StringSerializer.cpp
 │  │  └─ timer
 │  │     ├─ CMakeLists.txt
 │  │     ├─ include
@@ -122,17 +146,28 @@ mmo_server
 │     │  │  └─ WrapAroundTests.cpp
 │     │  ├─ memory_pool
 │     │  │  ├─ CMakeLists.txt
-│     │  │  └─ FixedBlockPoolTests.cpp
-│     │  └─ packet
+│     │  │  ├─ FixedBlockPoolTests.cpp
+│     │  │  ├─ MemoryPoolBoundaryTests.cpp
+│     │  │  └─ MemoryPoolStressTests.cpp
+│     │  ├─ packet
+│     │  │  ├─ CMakeLists.txt
+│     │  │  ├─ PacketBoundaryTests.cpp
+│     │  │  ├─ PacketBufferTests.cpp
+│     │  │  ├─ PacketHeaderLayoutTests.cpp
+│     │  │  ├─ PacketLargePayloadTests.cpp
+│     │  │  ├─ PacketReaderTests.cpp
+│     │  │  ├─ PacketRoundTripTests.cpp
+│     │  │  ├─ PacketViewTests.cpp
+│     │  │  └─ PacketWriterTests.cpp
+│     │  └─ serialization
+│     │     ├─ BinaryReaderTests.cpp
+│     │     ├─ BinaryWriterTests.cpp
 │     │     ├─ CMakeLists.txt
-│     │     ├─ PacketBoundaryTests.cpp
-│     │     ├─ PacketBufferTests.cpp
-│     │     ├─ PacketHeaderLayoutTests.cpp
-│     │     ├─ PacketLargePayloadTests.cpp
-│     │     ├─ PacketReaderTests.cpp
-│     │     ├─ PacketRoundTripTests.cpp
-│     │     ├─ PacketViewTests.cpp
-│     │     └─ PacketWriterTests.cpp
+│     │     ├─ PrimitiveSerializationTests.cpp
+│     │     ├─ SerializationBoundaryTests.cpp
+│     │     ├─ SerializationRoundTripTests.cpp
+│     │     ├─ StringSerializationTests.cpp
+│     │     └─ TestHelpers.hpp
 │     └─ runtime
 │        └─ timer
 │           ├─ CMakeLists.txt

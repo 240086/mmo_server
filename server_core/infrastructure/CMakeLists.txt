@@ -6,6 +6,7 @@ add_subdirectory(timer)
 add_subdirectory(lockfree_queue)
 add_subdirectory(packet)
 add_subdirectory(memory_pool)
+add_subdirectory(serialization)
 
 
 # 💡 未来扩展边界：当推进日志、网络模块时，直接加在这里：
@@ -15,8 +16,9 @@ add_subdirectory(memory_pool)
 # 逻辑聚合
 add_library(mmo_infrastructure INTERFACE)
 target_link_libraries(mmo_infrastructure INTERFACE 
-    mmo_timer
-    mmo_lockfree_queue
-    mmo_packet
-    memory_pool
+    mmo::timer
+    mmo::lockfree_queue
+    mmo::packet
+    mmo::memory_pool    
+    mmo::serialization
 )

@@ -2,7 +2,7 @@
     "name": "Layer1/Serialization/architecture.json",
     "module": "serialization",
     "layer": "Layer1",
-    "status": "architecture_phase",
+    "status": "frozen_v1",
     "responsibility": [
         "Binary serialization",
         "Binary deserialization",

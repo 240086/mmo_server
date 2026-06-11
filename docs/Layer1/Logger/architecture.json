@@ -1,0 +1,59 @@
+{
+    "name": "Layer1/Logger/architecture.json",
+    "module": "logger",
+    "layer": "Layer1",
+    "status": "design",
+    "responsibility": [
+        "Log event creation",
+        "Log level filtering",
+        "Log record management",
+        "Log formatting",
+        "Log sink dispatching",
+        "Process observability foundation",
+        "Deterministic log generation"
+    ],
+    "non_responsibility": [
+        "Metrics collection",
+        "Distributed tracing",
+        "Remote log aggregation",
+        "Network transport",
+        "Log analytics",
+        "Configuration management",
+        "Compression",
+        "Encryption"
+    ],
+    "dependencies": [],
+    "consumers": [
+        "event_bus",
+        "runtime",
+        "timer",
+        "net",
+        "gateway",
+        "rpc",
+        "service_discovery",
+        "simulation",
+        "db_agent",
+        "redis_proxy",
+        "gameplay"
+    ],
+    "v1_scope": [
+        "Logger",
+        "LogRecord",
+        "LogLevel",
+        "ILogSink",
+        "ConsoleSink",
+        "FileSink",
+        "TextFormatter"
+    ],
+    "future_scope": [
+        "AsyncLogger",
+        "StructuredLogger",
+        "JsonFormatter",
+        "NetworkSink",
+        "RingBufferSink",
+        "LogRotation",
+        "Compression",
+        "RemoteAggregation",
+        "DistributedTracing"
+    ]
+}
