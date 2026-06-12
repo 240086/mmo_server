@@ -97,3 +97,17 @@ Logger::Flush()
 必须保证：
 
 所有 Sink 已完成 Flush
+
+Concurrency Model (V1 FINAL):
+
+1. Logger::Log is lock-free at interface level.
+
+2. Logger does not guarantee ordering across threads.
+
+3. Logger does not perform synchronization internally.
+
+4. Each Sink implementation is responsible for its own thread safety.
+
+5. No shared locking is allowed in Logger core path.
+
+6. V1 prioritizes throughput over ordering consistency.

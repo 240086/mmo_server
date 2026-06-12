@@ -6,6 +6,12 @@ mmo_server
 ├─ client
 ├─ docs
 │  ├─ Layer1
+│  │  ├─ Logger
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
 │  │  ├─ MemoryPool
 │  │  │  ├─ architecture.json
 │  │  │  ├─ behavior.md
@@ -63,7 +69,21 @@ mmo_server
 │  │  │  │  └─ mmo
 │  │  │  │     └─ infrastructure
 │  │  │  │        └─ logger
+│  │  │  │           ├─ ConsoleSink.hpp
+│  │  │  │           ├─ FileSink.hpp
+│  │  │  │           ├─ IFormatter.hpp
+│  │  │  │           ├─ ILogSink.hpp
+│  │  │  │           ├─ LogLevel.hpp
+│  │  │  │           ├─ LogRecord.hpp
+│  │  │  │           ├─ Logger.hpp
+│  │  │  │           ├─ LoggerConstants.hpp
+│  │  │  │           ├─ LoggerTypes.hpp
+│  │  │  │           └─ TextFormatter.hpp
 │  │  │  └─ src
+│  │  │     ├─ ConsoleSink.cpp
+│  │  │     ├─ FileSink.cpp
+│  │  │     ├─ Logger.cpp
+│  │  │     └─ TextFormatter.cpp
 │  │  ├─ memory_pool
 │  │  │  ├─ CMakeLists.txt
 │  │  │  ├─ include
@@ -168,6 +188,9 @@ mmo_server
 │     │     ├─ SerializationRoundTripTests.cpp
 │     │     ├─ StringSerializationTests.cpp
 │     │     └─ TestHelpers.hpp
+│     ├─ logger
+│     │  ├─ LoggerInfrastructureTests.cpp
+│     │  └─ LongDurationStressTests.cpp
 │     └─ runtime
 │        └─ timer
 │           ├─ CMakeLists.txt

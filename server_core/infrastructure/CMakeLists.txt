@@ -7,6 +7,7 @@ add_subdirectory(lockfree_queue)
 add_subdirectory(packet)
 add_subdirectory(memory_pool)
 add_subdirectory(serialization)
+add_subdirectory(logger)
 
 
 # 💡 未来扩展边界：当推进日志、网络模块时，直接加在这里：
@@ -21,4 +22,5 @@ target_link_libraries(mmo_infrastructure INTERFACE
     mmo::packet
     mmo::memory_pool    
     mmo::serialization
+    mmo::logger
 )
