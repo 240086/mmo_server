@@ -6,6 +6,18 @@ mmo_server
 ├─ client
 ├─ docs
 │  ├─ Layer1
+│  │  ├─ ConfigSystem
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
+│  │  ├─ EventBus
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
 │  │  ├─ Logger
 │  │  │  ├─ architecture.json
 │  │  │  ├─ behavior.md
@@ -52,6 +64,18 @@ mmo_server
 │  ├─ Structure.md
 │  ├─ infrastructure
 │  │  ├─ CMakeLists.txt
+│  │  ├─ EventBus
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ infrastructure
+│  │  │  │        └─ EventBus
+│  │  │  │           ├─ EventBus.hpp
+│  │  │  │           ├─ EventBusTypes.hpp
+│  │  │  │           ├─ IEventBus.hpp
+│  │  │  │           └─ SubscriptionToken.hpp
+│  │  │  └─ src
+│  │  │     └─ EventBus.cpp
 │  │  ├─ lockfree_queue
 │  │  │  ├─ CMakeLists.txt
 │  │  │  ├─ include
@@ -152,6 +176,13 @@ mmo_server
 │  └─ tests
 │     ├─ CMakeLists.txt
 │     ├─ infrastructure
+│     │  ├─ EventBus
+│     │  │  ├─ CMakeLists.txt
+│     │  │  ├─ EventBusBasicTests.cpp
+│     │  │  ├─ EventBusConcurrencyTests.cpp
+│     │  │  ├─ EventBusLongDurationTests.cpp
+│     │  │  ├─ EventBusReentrancyTests.cpp
+│     │  │  └─ EventBusSnapshotTests.cpp
 │     │  ├─ lockfree_queue
 │     │  │  ├─ CMakeLists.txt
 │     │  │  ├─ ConsumerStarvationTests.cpp
@@ -164,6 +195,10 @@ mmo_server
 │     │  │  ├─ ProducerBurstTests.cpp
 │     │  │  ├─ StressTests.cpp
 │     │  │  └─ WrapAroundTests.cpp
+│     │  ├─ logger
+│     │  │  ├─ CMakeLists.txt
+│     │  │  ├─ LoggerInfrastructureTests.cpp
+│     │  │  └─ LongDurationStressTests.cpp
 │     │  ├─ memory_pool
 │     │  │  ├─ CMakeLists.txt
 │     │  │  ├─ FixedBlockPoolTests.cpp
@@ -188,9 +223,6 @@ mmo_server
 │     │     ├─ SerializationRoundTripTests.cpp
 │     │     ├─ StringSerializationTests.cpp
 │     │     └─ TestHelpers.hpp
-│     ├─ logger
-│     │  ├─ LoggerInfrastructureTests.cpp
-│     │  └─ LongDurationStressTests.cpp
 │     └─ runtime
 │        └─ timer
 │           ├─ CMakeLists.txt

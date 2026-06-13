@@ -1,0 +1,33 @@
+{
+    "name": "event_bus",
+    "layer": "Layer1",
+    "type": "core_infrastructure",
+    "priority": "high",
+    "status": "design",
+    "owner": "server_core",
+    "depends_on": [
+        "logger"
+    ],
+    "required_by": [
+        "metrics",
+        "runtime",
+        "simulation",
+        "net",
+        "gateway",
+        "rpc",
+        "gameplay"
+    ],
+    "design_principles": [
+        "deterministic_dispatch",
+        "type_safe_events",
+        "synchronous_execution",
+        "minimal_runtime_overhead",
+        "explicit_subscription",
+        "no_hidden_allocations"
+    ],
+    "performance_targets": {
+        "subscribe": "O(1)",
+        "publish": "O(N)",
+        "unsubscribe": "O(N)"
+    }
+}

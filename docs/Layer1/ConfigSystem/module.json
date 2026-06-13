@@ -1,0 +1,25 @@
+{
+    "name": "config_system",
+    "layer": "Layer1",
+    "dependencies": [],
+    "used_by": [
+        "Net",
+        "Runtime",
+        "Scene",
+        "AOI",
+        "Combat",
+        "Skill",
+        "AI",
+        "Gateway",
+        "RPC",
+        "Gameplay"
+    ],
+    "public_headers": [
+        "ConfigManager.hpp",
+        "ConfigValue.hpp",
+        "ConfigTypes.hpp"
+    ],
+    "implementation_files": [
+        "ConfigManager.cpp"
+    ]
+}

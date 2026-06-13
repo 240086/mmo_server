@@ -1,7 +1,7 @@
 {
     "name": "Layer1/timer/state.json",
     "module": "timer",
-    "overall_status": "runtime_validation_passed",
+    "overall_status": "implementation_v1",
     "progress": {
         "architecture": "stable",
         "behavior_contracts": "stable",
@@ -9,7 +9,7 @@
         "implementation_v1": "stable",
         "runtime_validation": "passed",
         "unit_tests": "passed",
-        "integration_tests": "pending"
+        "integration_tests": "passed"
     },
     "files": {
         "TimerTypes.hpp": {

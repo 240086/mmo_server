@@ -1,59 +1,53 @@
 {
-    "name": "Layer1/Logger/architecture.json",
-    "module": "logger",
+    "name": "Layer1/EventBus/architecture.json",
+    "module": "event_bus",
     "layer": "Layer1",
     "status": "design",
     "responsibility": [
-        "Log event creation",
-        "Log level filtering",
-        "Log record management",
-        "Log formatting",
-        "Log sink dispatching",
-        "Process observability foundation",
-        "Deterministic log generation"
+        "Event subscription",
+        "Event unsubscription",
+        "Synchronous event dispatch",
+        "Type-safe event routing",
+        "In-process event coordination",
+        "Deterministic handler invocation"
     ],
     "non_responsibility": [
-        "Metrics collection",
-        "Distributed tracing",
-        "Remote log aggregation",
+        "Asynchronous messaging",
+        "Cross-thread communication",
+        "Distributed event propagation",
         "Network transport",
-        "Log analytics",
-        "Configuration management",
-        "Compression",
-        "Encryption"
+        "Message persistence",
+        "Event replay",
+        "Actor mailbox",
+        "RPC routing"
     ],
-    "dependencies": [],
+    "dependencies": [
+        "logger"
+    ],
     "consumers": [
-        "event_bus",
-        "runtime",
         "timer",
+        "runtime",
+        "simulation",
         "net",
         "gateway",
         "rpc",
-        "service_discovery",
-        "simulation",
-        "db_agent",
-        "redis_proxy",
+        "metrics",
         "gameplay"
     ],
     "v1_scope": [
-        "Logger",
-        "LogRecord",
-        "LogLevel",
-        "ILogSink",
-        "ConsoleSink",
-        "FileSink",
-        "TextFormatter"
+        "EventBus",
+        "EventId",
+        "SubscriptionHandle",
+        "EventHandler",
+        "Synchronous Publish",
+        "Type-safe Subscribe"
     ],
     "future_scope": [
-        "AsyncLogger",
-        "StructuredLogger",
-        "JsonFormatter",
-        "NetworkSink",
-        "RingBufferSink",
-        "LogRotation",
-        "Compression",
-        "RemoteAggregation",
-        "DistributedTracing"
+        "AsyncEventBus",
+        "CrossThreadDispatch",
+        "EventPriority",
+        "EventQueue",
+        "EventReplay",
+        "DistributedEventBridge"
     ]
 }
