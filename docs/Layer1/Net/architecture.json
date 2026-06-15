@@ -1,0 +1,30 @@
+{
+    "name": "Layer1/ConfigSystem/architecture.json",
+    "module": "net",
+    "overall_goal": "deterministic and scalable network transport layer",
+    "backend": "reactor",
+    "transport": [
+        "tcp"
+    ],
+    "ownership": {
+        "socket_owned_by_connection": true,
+        "connection_owned_by_server": true,
+        "packet_owned_by_runtime": false
+    },
+    "threading_model": {
+        "acceptor": "single-thread",
+        "io": "single-thread",
+        "dispatch": "runtime-thread"
+    },
+    "packet_boundary": {
+        "length_prefixed": true,
+        "max_packet_size": 1048576 
+    },
+    "future_evolution": [
+        "epoll",
+        "io_uring",
+        "tls",
+        "kcp",
+        "websocket"
+    ]
+}

@@ -5,7 +5,7 @@
 
 namespace mmo::infrastructure::config
 {
-    class JsonConfigParser final : public IConfigParser
+    class KeyValueConfigParser final : public IConfigParser
     {
     public:
         ParseResult ParseFile(

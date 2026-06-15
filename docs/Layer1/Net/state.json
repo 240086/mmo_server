@@ -1,0 +1,21 @@
+{
+    "name": "Layer1/Net/state.json",
+    "module": "net",
+    "overall_status": "architecture_design",
+    "progress": {
+        "architecture": "stable",
+        "behavior_contracts": "stable",
+        "internal_design": "stable",
+        "interfaces": "not_started",
+        "implementation_v1": "not_started",
+        "validation": "not_started"
+    },
+    "files": {},
+    "technical_debt": [],
+    "known_risks": [
+        {
+            "id": "NET-001",
+            "description": "V1 uses single IO thread."
+        }
+    ]
+}

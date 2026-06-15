@@ -9,6 +9,7 @@ mmo_server
 │  │  ├─ ConfigSystem
 │  │  │  ├─ architecture.json
 │  │  │  ├─ behavior.md
+│  │  │  ├─ freeze_report.md
 │  │  │  ├─ internal_design.md
 │  │  │  ├─ module.json
 │  │  │  └─ state.json
@@ -27,6 +28,13 @@ mmo_server
 │  │  ├─ MemoryPool
 │  │  │  ├─ architecture.json
 │  │  │  ├─ behavior.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
+│  │  ├─ Net
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ freeze_report.md
 │  │  │  ├─ internal_design.md
 │  │  │  ├─ module.json
 │  │  │  └─ state.json
@@ -64,6 +72,29 @@ mmo_server
 │  ├─ Structure.md
 │  ├─ infrastructure
 │  │  ├─ CMakeLists.txt
+│  │  ├─ ConfigSystem
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ infrastructure
+│  │  │  │        └─ ConfigSystem
+│  │  │  │           ├─ ConfigSystem.hpp
+│  │  │  │           ├─ ConfigTypes.hpp
+│  │  │  │           ├─ ConfigValue.hpp
+│  │  │  │           ├─ IConfigSystem.hpp
+│  │  │  │           ├─ parser
+│  │  │  │           │  ├─ IConfigParser.hpp
+│  │  │  │           │  ├─ KeyValueConfigParser.hpp
+│  │  │  │           │  └─ ParseResult.hpp
+│  │  │  │           └─ source
+│  │  │  │              ├─ FileConfigSource.hpp
+│  │  │  │              └─ IConfigSource.hpp
+│  │  │  └─ src
+│  │  │     ├─ ConfigSystem.cpp
+│  │  │     ├─ parser
+│  │  │     │  └─ KeyValueConfigParser.cpp
+│  │  │     └─ source
+│  │  │        └─ FileConfigSource.cpp
 │  │  ├─ EventBus
 │  │  │  ├─ CMakeLists.txt
 │  │  │  ├─ include
@@ -176,6 +207,13 @@ mmo_server
 │  └─ tests
 │     ├─ CMakeLists.txt
 │     ├─ infrastructure
+│     │  ├─ ConfigSystem
+│     │  │  ├─ CMakeLists.txt
+│     │  │  ├─ ConfigAccessTests.cpp
+│     │  │  ├─ ConfigConcurrencyTests.cpp
+│     │  │  ├─ ConfigFailureTests.cpp
+│     │  │  ├─ ConfigLoadTests.cpp
+│     │  │  └─ ConfigParserTests.cpp
 │     │  ├─ EventBus
 │     │  │  ├─ CMakeLists.txt
 │     │  │  ├─ EventBusBasicTests.cpp

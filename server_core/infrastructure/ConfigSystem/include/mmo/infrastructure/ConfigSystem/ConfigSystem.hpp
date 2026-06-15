@@ -4,8 +4,12 @@
 #include <filesystem>
 #include <shared_mutex>
 #include <unordered_map>
+#include <mutex>
+#include <memory>
+#include <vector>
 
 #include <mmo/infrastructure/ConfigSystem/IConfigSystem.hpp>
+#include <mmo/infrastructure/ConfigSystem/parser/IConfigParser.hpp>
 
 namespace mmo::infrastructure::config
 {
@@ -27,7 +31,8 @@ namespace mmo::infrastructure::config
     class ConfigSystem final : public IConfigSystem
     {
     public:
-        ConfigSystem() = default;
+        // 🌟 允许构造时注入任何 Parser。若为空，则默认构造 V1 JsonConfigParser 基线
+        explicit ConfigSystem(std::unique_ptr<IConfigParser> parser = nullptr);
         ~ConfigSystem() override = default;
 
         ConfigSystem(const ConfigSystem &) = delete;
@@ -81,5 +86,8 @@ namespace mmo::infrastructure::config
         bool loaded_{false};
 
         mutable std::shared_mutex mutex_;
+
+        // 🌟 核心升级：不再依赖具体类，而是面向 IConfigParser 契约编程
+        std::unique_ptr<IConfigParser> parser_;
     };
 }
