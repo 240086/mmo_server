@@ -10,6 +10,7 @@ add_subdirectory(serialization)
 add_subdirectory(logger)
 add_subdirectory(EventBus)
 add_subdirectory(ConfigSystem)
+add_subdirectory(Net)
 
 
 # 💡 未来扩展边界：当推进日志、网络模块时，直接加在这里：
@@ -27,4 +28,5 @@ target_link_libraries(mmo_infrastructure INTERFACE
     mmo::logger
     mmo::event_bus
     mmo::config_system
+    mmo::net
 )

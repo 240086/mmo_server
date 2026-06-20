@@ -1,21 +1,107 @@
 {
     "name": "Layer1/Net/state.json",
     "module": "net",
-    "overall_status": "architecture_design",
+    "overall_status": "frozen_v1",
     "progress": {
-        "architecture": "stable",
-        "behavior_contracts": "stable",
-        "internal_design": "stable",
-        "interfaces": "not_started",
-        "implementation_v1": "not_started",
-        "validation": "not_started"
+        "architecture": "frozen_v1",
+        "behavior_contracts": "frozen_v1",
+        "internal_design": "frozen_v1",
+        "interfaces": "frozen_v1",
+        "implementation_v1": "frozen_v1",
+        "lockfree_queue_integration": "verified",
+        "validation": "passed",
+        "stress_validation": "passed",
+        "tsan_validation": "passed",
+        "asan_validation": "passed",
+        "valgrind_validation": "passed"
     },
-    "files": {},
-    "technical_debt": [],
+    "files": {
+        "ConnectionId.hpp": {
+            "status": "frozen_v1"
+        },
+        "IConnection.hpp": {
+            "status": "frozen_v1"
+        },
+        "INetServer.hpp": {
+            "status": "frozen_v1"
+        },
+        "NetTypes.hpp": {
+            "status": "frozen_v1"
+        },
+        "PacketFrame.hpp": {
+            "status": "frozen_v1"
+        },
+        "PacketCodec.hpp": {
+            "status": "implemented_v1"
+        },
+        "PacketCodec.cpp": {
+            "status": "implemented_v1"
+        },
+        "TcpConnection.hpp": {
+            "status": "implemented_v1"
+        },
+        "TcpConnection.cpp": {
+            "status": "implemented_v1"
+        },
+        "NetServer.hpp": {
+            "status": "frozen_v1"
+        },
+        "NetServer.cpp": {
+            "status": "implemented_v1"
+        },
+        "NetTestHelper.hpp": {
+            "status": "implemented"
+        },
+        "PacketCodecTests.cpp": {
+            "status": "passed"
+        },
+        "TcpConnectionTests.cpp": {
+            "status": "passed"
+        },
+        "NetServerLifecycleTests.cpp": {
+            "status": "passed"
+        },
+        "NetServerAcceptTests.cpp": {
+            "status": "passed"
+        },
+        "NetServerReceiveTests.cpp": {
+            "status": "passed"
+        },
+        "NetServerLockFreeQueueTests.cpp": {
+            "status": "passed"
+        },
+        "NetServerConnectionTests.cpp": {
+            "status": "passed"
+        }
+    },
+    "technical_debt": [
+        {
+            "id": "NET-TD-001",
+            "description": "PacketCodec receive buffer still uses vector erase O(n)."
+        },
+        {
+            "id": "NET-TD-002",
+            "description": "WriteLoop wakeup strategy can be optimized with empty->nonempty transition trigger."
+        }
+    ],
     "known_risks": [
         {
             "id": "NET-001",
             "description": "V1 uses single IO thread."
         }
-    ]
+    ],
+    "dependency_blockers": [
+        {
+            "module": "lockfree_queue",
+            "issue": "TSan data race detected during MPSCQueue<ReceivedPacket> producer/consumer synchronization"
+        }
+    ],
+    "validation_summary": {
+        "gtest": "passed",
+        "asan": "passed",
+        "ubsan": "passed",
+        "valgrind": "passed",
+        "stress_test": "passed",
+        "tsan": "blocked_by_dependency"
+    }
 }

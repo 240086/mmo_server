@@ -10,7 +10,7 @@ namespace mmo::infrastructure::lockfree_queue
 {
 
     template <typename T>
-    struct QueueSlot
+    struct alignas(kCacheLineSize) QueueSlot
     {
         std::atomic<QueueSequence> sequence;
 

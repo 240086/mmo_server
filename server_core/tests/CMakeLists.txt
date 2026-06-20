@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.20)
 # =================================================================
 
 # 向下路由到具体的业务测试目录
-add_subdirectory(runtime/timer)
+add_subdirectory(infrastructure/timer)
 add_subdirectory(infrastructure/lockfree_queue)
 add_subdirectory(infrastructure/packet)
 add_subdirectory(infrastructure/memory_pool)
@@ -14,3 +14,4 @@ add_subdirectory(infrastructure/serialization)
 add_subdirectory(infrastructure/logger)
 add_subdirectory(infrastructure/EventBus)
 add_subdirectory(infrastructure/ConfigSystem)
+add_subdirectory(infrastructure/Net)
