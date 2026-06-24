@@ -6,7 +6,7 @@
 namespace mmo::runtime
 {
 
-    inline constexpr TaskNodeCount TaskGraphMaxNodesV1 = 256;
+    // inline constexpr TaskNodeCount TaskGraphMaxNodesV1 = 256;
 
     inline constexpr TaskDependencyCount TaskGraphMaxDependenciesV1 = 1024;
 

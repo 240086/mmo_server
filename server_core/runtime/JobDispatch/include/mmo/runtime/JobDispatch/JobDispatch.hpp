@@ -18,6 +18,7 @@ namespace mmo::runtime
 {
 
     class TaskGraph;
+    class TaskNode;
     class RuntimeContext;
 
     /**
@@ -42,7 +43,7 @@ namespace mmo::runtime
         bool Initialize(
             const TaskGraph &graph,
             RuntimeContext &context,
-            const TaskRegistry &registry) = 0;
+            const TaskRegistry &registry) override;
         bool ExecutePhase(RuntimePhaseId phaseId) override;
         void Shutdown() override;
 
@@ -54,6 +55,9 @@ namespace mmo::runtime
         void BuildRuntimeState();
         void SeedReadyQueue();
         void ReleaseSuccessors(TaskId completedTask);
+
+        [[nodiscard]]
+        const TaskNode &GetNode(TaskId id) const noexcept;
 
         /**
          * @brief 基于 Generation Epoch 的高可靠屏障
@@ -82,6 +86,8 @@ namespace mmo::runtime
         // ============================================================================
         const TaskGraph *m_taskGraph{nullptr};
         RuntimeContext *m_runtimeContext{nullptr};
+        // FIX: 解决 TSAN 视角的 Data Race，主线程写与 Worker 线程读形成 Release-Acquire 语义
+        std::atomic<RuntimePhaseId> m_currentPhase{RuntimePhaseId::Input};
 
         // ============================================================================
         // 核心物理执行与调度资源

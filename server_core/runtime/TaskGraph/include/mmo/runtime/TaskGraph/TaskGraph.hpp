@@ -36,6 +36,11 @@ namespace mmo::runtime
             RuntimePhaseCountV1>
             phaseRanges{};
 
+        std::array<
+            TaskId,
+            TaskGraphMaxNodesV1>
+            taskIdToNodeIndex{};
+
         TaskDependencyCount dependencyCount{0};
     };
 

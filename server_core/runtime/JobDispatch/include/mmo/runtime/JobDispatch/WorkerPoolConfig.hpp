@@ -8,9 +8,8 @@
 namespace mmo::runtime
 {
 
-    class RuntimeContext;
-    class TaskRegistry;
     class ITaskCompletionSink;
+    class ITaskExecutor;
 
     /**
      * @brief Worker 物理基础设施冷启动静态配置面
@@ -18,8 +17,7 @@ namespace mmo::runtime
      */
     struct WorkerPoolConfig final
     {
-        RuntimeContext *runtimeContext{nullptr};
-        const TaskRegistry *registry{nullptr};
+        ITaskExecutor *executor{nullptr};
         mmo::infrastructure::lockfree_queue::MPMCQueue<TaskId, TaskGraphMaxNodesV1> *readyQueue{nullptr};
         ITaskCompletionSink *completionSink{nullptr};
     };

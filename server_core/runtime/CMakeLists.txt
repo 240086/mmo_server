@@ -5,13 +5,15 @@ cmake_minimum_required(VERSION 3.22)
 add_subdirectory(RuntimeContext)
 add_subdirectory(RuntimePhase)
 add_subdirectory(RuntimePipeline)
-add_subdirectory(TaskGraph) # 🚀 成功挂载核心多线程驱动任务图
+add_subdirectory(TaskGraph)
+add_subdirectory(JobDispatch)
 
 # 汇聚成对外的统一运行时骨架公共接口库
 add_library(mmo_runtime INTERFACE)
 
 target_link_libraries(mmo_runtime
     INTERFACE
+    mmo_runtime_job_dispatch
     mmo_runtime_context
     mmo_runtime_phase
     mmo_runtime_pipeline

@@ -10,7 +10,7 @@
 namespace mmo::runtime
 {
 
-    struct TaskNode final
+    class TaskNode final
     {
         TaskId id{InvalidTaskId};                      // 任务唯一标识 ID
         RuntimePhaseId phaseId{RuntimePhaseId::Input}; // 所属的运行时 Phase ID

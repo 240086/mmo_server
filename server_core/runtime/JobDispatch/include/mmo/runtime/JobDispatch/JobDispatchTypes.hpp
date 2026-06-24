@@ -14,7 +14,4 @@ namespace mmo::runtime
 
     using WorkerIndex = std::uint16_t;
 
-    constexpr TaskId InvalidTaskId =
-        static_cast<TaskId>(0xFFFF);
-
 }
