@@ -8,6 +8,7 @@ set(JOB_DISPATCH_TEST_SOURCES
     JobDispatchTests.cpp
     TaskRegistryTests.cpp
     WorkerPoolTests.cpp
+    JobDispatchStressTests.cpp # 🎯 压测源码并入标准统一管理
 )
 
 # 创建工作任务分发微架构验证可执行目标
@@ -83,8 +84,9 @@ add_test(NAME Runtime_JobDispatch_Registry_Tests
 )
 set_tests_properties(Runtime_JobDispatch_Registry_Tests PROPERTIES LABELS "Fast")
 
-# 【门禁 B】线程池核心并发、伸缩性与分发吞吐压力测试 (CI Heavy Lock)
+# 【门禁 B】线程池核心并发、极限拓扑与万次压力门禁 (CI Heavy Lock)
+# 🛡️ 修复：通过冒号 : 追加入 JobDispatchStressTests.* 过滤器，打通真正的全量压力自动化流水线
 add_test(NAME Runtime_JobDispatch_Concurrency_Tests
-    COMMAND job_dispatch_tests --gtest_filter=WorkerPoolTests.*:JobDispatchTests.*
+    COMMAND job_dispatch_tests --gtest_filter=WorkerPoolTests.*:JobDispatchTests.*:JobDispatchStressTests.*
 )
 set_tests_properties(Runtime_JobDispatch_Concurrency_Tests PROPERTIES LABELS "Heavy")
