@@ -1,0 +1,60 @@
+{
+  "name": "Layer2/architecture.json",
+  "layer": "Runtime",
+  "overall_goal": "deterministic scalable runtime kernel for MMO simulation",
+  "responsibilities": [
+    "tick progression",
+    "runtime lifecycle",
+    "phase execution",
+    "task dependency scheduling",
+    "parallel execution",
+    "tick synchronization"
+  ],
+  "non_responsibilities": [
+    "entity",
+    "scene",
+    "aoi",
+    "movement",
+    "combat",
+    "skill",
+    "ai",
+    "rpc",
+    "gateway"
+  ],
+  "modules": {
+    "RuntimeContext": {
+      "role": "runtime state container"
+    },
+    "TickScheduler": {
+      "role": "deterministic tick driver"
+    },
+    "RuntimePipeline": {
+      "role": "runtime execution pipeline"
+    },
+    "RuntimePhase": {
+      "role": "pipeline execution stage"
+    },
+    "TaskGraph": {
+      "role": "task dependency graph"
+    },
+    "JobDispatch": {
+      "role": "parallel task executor"
+    },
+    "ActorMailbox": {
+      "role": "optional asynchronous messaging"
+    }
+  },
+  "execution_model": {
+    "tick": "fixed_step",
+    "deterministic": true,
+    "parallel_execution": true,
+    "barrier_synchronization": true
+  },
+  "future_evolution": [
+    "work_stealing_scheduler",
+    "scene_partition_parallelism",
+    "distributed_runtime",
+    "fiber_scheduler",
+    "cross_node_task_graph"
+  ]
+}

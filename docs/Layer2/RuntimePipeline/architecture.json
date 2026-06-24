@@ -1,0 +1,39 @@
+{
+    "name": "Layer2/RuntimePipeline/architecture.json",
+    "module": "RuntimePipeline",
+    "overall_goal": "deterministic runtime phase execution pipeline",
+    "responsibilities": [
+        "phase storage",
+        "phase ordering",
+        "phase traversal",
+        "phase execution boundaries"
+    ],
+    "non_responsibilities": [
+        "task storage",
+        "task dependency",
+        "task execution",
+        "thread scheduling",
+        "worker management",
+        "gameplay logic",
+        "scene management"
+    ],
+    "ownership": {
+        "owned_by": "TickScheduler",
+        "owns": [
+            "RuntimePhase"
+        ]
+    },
+    "dependencies": [
+        "RuntimeContext",
+        "RuntimePhase"
+    ],
+    "used_by": [
+        "TickScheduler",
+        "TaskGraph"
+    ],
+    "future_evolution": [
+        "phase profiling",
+        "phase metrics",
+        "phase tracing"
+    ]
+}

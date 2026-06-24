@@ -1,0 +1,25 @@
+{
+    "name": "mmo_job_dispatch",
+    "layer": "layer2",
+    "type": "core_engine",
+    "description": "High-performance immutable topology execution engine based on CSR and atomic wait models.",
+    "dependencies": {
+        "infrastructure/lockfree_queue": {
+            "scope": "private",
+            "required_status": "frozen_v1_1"
+        },
+        "layer2/task_graph": {
+            "scope": "public",
+            "required_status": "frozen_v1"
+        }
+    },
+    "visibility": [
+        "layer2/tick_scheduler",
+        "runtime_pipeline"
+    ],
+    "features": {
+        "no_heap_at_runtime": true,
+        "virtual_dispatch_prohibited": true,
+        "barrier_mechanism": "std::atomic_wait"
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "name": "Layer2/TaskGraph/module.json",
+    "layer": "Layer2",
+    "dependencies": [
+        "RuntimePhase"
+    ],
+    "used_by": [
+        "JobDispatch",
+        "TickScheduler"
+    ],
+    "public_headers": [
+        "TaskGraph.hpp",
+        "TaskNode.hpp",
+        "TaskDependency.hpp",
+        "TaskGraphTypes.hpp"
+    ],
+    "implementation_files": [
+        "TaskGraph.cpp"
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "module": "JobDispatch",
+    "layer": "Layer2",
+    "status": "draft_v1",
+    "purpose": "Deterministic parallel execution engine for runtime task scheduling.",
+    "responsibilities": [
+        "Execute TaskGraph tasks",
+        "Manage worker threads",
+        "Maintain runtime dependency state",
+        "Release successor tasks",
+        "Coordinate phase completion barrier"
+    ],
+    "depends_on": [
+        "RuntimeContext",
+        "RuntimePhase",
+        "RuntimePipeline",
+        "TaskGraph",
+        "MPMCQueue"
+    ],
+    "used_by": [
+        "TickScheduler"
+    ],
+    "provides": [
+        "Parallel task execution",
+        "Dependency resolution",
+        "Phase completion synchronization"
+    ],
+    "non_responsibilities": [
+        "Business logic",
+        "Topology construction",
+        "Task registration ownership",
+        "Actor messaging"
+    ],
+    "execution_model": "ForkJoin",
+    "memory_model": "StaticMemory",
+    "allocation_policy": "NoRuntimeAllocation",
+    "thread_model": "FixedWorkerPool",
+    "determinism": "Required"
+}

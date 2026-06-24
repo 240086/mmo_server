@@ -1,0 +1,25 @@
+{
+    "name": "Layer2/TickScheduler/module.json",
+    "layer": "Layer2",
+    "dependencies": [
+        "RuntimeContext",
+        "RuntimePipeline",
+        "timer"
+    ],
+    "used_by": [
+        "Scene",
+        "AOI",
+        "Movement",
+        "Combat",
+        "Skill",
+        "AI"
+    ],
+    "public_headers": [
+        "ITickScheduler.hpp",
+        "TickScheduler.hpp",
+        "TickSchedulerConfig.hpp"
+    ],
+    "implementation_files": [
+        "TickScheduler.cpp"
+    ]
+}

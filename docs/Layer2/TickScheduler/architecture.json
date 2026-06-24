@@ -1,0 +1,65 @@
+{
+    "name": "Layer2/TickScheduler/architecture.json",
+    "module": "TickScheduler",
+
+    "overall_goal":
+    "deterministic fixed-step runtime driver",
+
+    "responsibilities":
+    [
+        "tick progression",
+        "fixed timestep management",
+        "runtime context update",
+        "runtime pipeline dispatch",
+        "tick synchronization"
+    ],
+
+    "non_responsibilities":
+    [
+        "scene execution",
+        "entity management",
+        "combat logic",
+        "task execution",
+        "thread scheduling",
+        "network processing"
+    ],
+
+    "ownership":
+    {
+        "owned_by": "runtime_thread"
+    },
+
+    "threading_model":
+    {
+        "writer": "runtime_thread",
+        "worker_interaction":
+        "indirect_via_runtime_pipeline"
+    },
+
+    "dependencies":
+    [
+        "RuntimeContext",
+        "RuntimePipeline",
+        "Timer",
+        "ConfigSystem",
+        "Logger"
+    ],
+
+    "used_by":
+    [
+        "Scene",
+        "AOI",
+        "Movement",
+        "Combat",
+        "Skill",
+        "AI"
+    ],
+
+    "future_evolution":
+    [
+        "catch_up_policy",
+        "runtime_pause_resume",
+        "distributed_tick_source",
+        "multi_scene_tick_domain"
+    ]
+}

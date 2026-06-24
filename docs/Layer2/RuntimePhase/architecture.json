@@ -1,0 +1,34 @@
+{
+    "name": "Layer2/RuntimePhase/architecture.json",
+    "module": "RuntimePhase",
+    "overall_goal": "deterministic execution stage abstraction for MMO runtime",
+    "responsibilities": [
+        "phase identity",
+        "phase lifecycle",
+        "phase ordering",
+        "phase execution boundary",
+        "phase synchronization point"
+    ],
+    "non_responsibilities": [
+        "task scheduling",
+        "job execution",
+        "scene management",
+        "entity storage",
+        "combat logic",
+        "network processing"
+    ],
+    "ownership": {
+        "owned_by": "RuntimePipeline",
+        "executed_by": "TickScheduler"
+    },
+    "threading_model": {
+        "registration": "startup_only",
+        "execution": "runtime_thread",
+        "parallel_work": "delegated_to_job_dispatch"
+    },
+    "future_evolution": [
+        "parallel_phase",
+        "phase_dependency_graph",
+        "distributed_phase_execution"
+    ]
+}

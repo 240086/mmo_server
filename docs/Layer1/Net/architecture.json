@@ -1,5 +1,5 @@
 {
-    "name": "Layer1/ConfigSystem/architecture.json",
+    "name": "Layer1/Net/architecture.json",
     "module": "net",
     "overall_goal": "deterministic and scalable network transport layer",
     "backend": "reactor",

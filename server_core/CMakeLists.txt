@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.20)
 add_subdirectory(infrastructure)
 
 # 2. 💡 未来扩展边界：进入 L2 运行时层 (EventLoop, Actor Model, TaskScheduler)
-# add_subdirectory(runtime)
+add_subdirectory(runtime)
 
 enable_testing()
 add_subdirectory(tests) # 👈 确保核心层负责拉起它内部的测试
@@ -23,5 +23,5 @@ add_library(mmo_core INTERFACE)
 target_link_libraries(mmo_core INTERFACE
     mmo_infrastructure
 
-    # mmo_runtime
+    mmo_runtime
 )

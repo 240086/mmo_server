@@ -15,6 +15,7 @@ set(LFQ_HEADERS
     "${LFQ_INC_BASE}/MPSCQueue.hpp"
     "${LFQ_INC_BASE}/QueueSlot.hpp"
     "${LFQ_INC_BASE}/QueueTypes.hpp"
+    "${LFQ_INC_BASE}/MPMCQueue.hpp"
 )
 
 # =====================================================

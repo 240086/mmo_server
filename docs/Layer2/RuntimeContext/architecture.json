@@ -1,0 +1,42 @@
+{
+    "name": "Layer2/RuntimeContext/architecture.json",
+    "module": "RuntimeContext",
+    "overall_goal": "runtime execution state container for deterministic MMO runtime",
+    "responsibilities": [
+        "tick metadata storage",
+        "frame metadata storage",
+        "runtime execution state",
+        "runtime mode tracking",
+        "thread execution metadata"
+    ],
+    "non_responsibilities": [
+        "scene management",
+        "entity storage",
+        "aoi state",
+        "combat state",
+        "skill state",
+        "network state",
+        "rpc state"
+    ],
+    "ownership": {
+        "owned_by": "runtime_thread",
+        "worker_access": "read_only",
+        "external_thread_access": "forbidden"
+    },
+    "threading_model": {
+        "writer": "runtime_thread",
+        "readers": [
+            "worker_threads"
+        ]
+    },
+    "lifetime": {
+        "created_by": "TickScheduler",
+        "destroyed_by": "TickScheduler",
+        "scope": "single_runtime_instance"
+    },
+    "future_evolution": [
+        "runtime_metrics_snapshot",
+        "distributed_runtime_metadata",
+        "cross_node_tick_context"
+    ]
+}

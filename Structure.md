@@ -48,7 +48,9 @@ mmo_server
 │  │  ├─ index.json
 │  │  ├─ lockfree_queue
 │  │  │  ├─ architecture.json
+│  │  │  ├─ architecture_addendum_mpmc.md
 │  │  │  ├─ behavior.md
+│  │  │  ├─ interface_contract.md
 │  │  │  ├─ internal_design.md
 │  │  │  ├─ module.json
 │  │  │  └─ state.json
@@ -64,6 +66,58 @@ mmo_server
 │  │     ├─ internal_design.md
 │  │     ├─ module.json
 │  │     └─ state.json
+│  ├─ Layer2
+│  │  ├─ JobDispatch
+│  │  │  ├─ JobDispatch_CPP_Design.md
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ interface_contract.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
+│  │  ├─ RuntimeContext
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ freeze_report.md
+│  │  │  ├─ interface_contract.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
+│  │  ├─ RuntimePhase
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ freeze_report.md
+│  │  │  ├─ interface_contract.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
+│  │  ├─ RuntimePipeline
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ interface_contract.md
+│  │  │  ├─ internal_design.md
+│  │  │  └─ state.json
+│  │  ├─ TaskGraph
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ interface_contract.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
+│  │  ├─ TickScheduler
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ freeze_report.md
+│  │  │  ├─ interface_contract.md
+│  │  │  ├─ internal_design.md
+│  │  │  ├─ module.json
+│  │  │  └─ state.json
+│  │  ├─ architecture.json
+│  │  ├─ index.json
+│  │  ├─ module_dependency.md
+│  │  ├─ runtime_thread_model.md
+│  │  ├─ tick_lifecycle.md
+│  │  └─ 路线.md
 │  ├─ index.json
 │  └─ 架构.md
 ├─ game_server
@@ -132,6 +186,7 @@ mmo_server
 │  │  │  │     └─ infrastructure
 │  │  │  │        └─ lockfree_queue
 │  │  │  │           ├─ CacheAligned.hpp
+│  │  │  │           ├─ MPMCQueue.hpp
 │  │  │  │           ├─ MPSCQueue.hpp
 │  │  │  │           ├─ QueueSlot.hpp
 │  │  │  │           └─ QueueTypes.hpp
@@ -221,7 +276,68 @@ mmo_server
 │  │        ├─ SteadyClock.cpp
 │  │        └─ TimerQueue.cpp
 │  ├─ runtime
-│  │  └─ CMakeLists.txt
+│  │  ├─ CMakeLists.txt
+│  │  ├─ JobDispatch
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ runtime
+│  │  │  │        └─ JobDispatch
+│  │  │  │           ├─ IJobDispatch.hpp
+│  │  │  │           ├─ ITaskCompletionSink.hpp
+│  │  │  │           ├─ ITaskExecutor.hpp
+│  │  │  │           ├─ JobDispatch.hpp
+│  │  │  │           ├─ JobDispatchConstants.hpp
+│  │  │  │           ├─ JobDispatchTypes.hpp
+│  │  │  │           ├─ TaskFunction.hpp
+│  │  │  │           ├─ TaskRegistry.hpp
+│  │  │  │           ├─ TaskRuntimeState.hpp
+│  │  │  │           ├─ WorkerContext.hpp
+│  │  │  │           ├─ WorkerPool.hpp
+│  │  │  │           ├─ WorkerPoolConfig.hpp
+│  │  │  │           └─ WorkerThread.hpp
+│  │  │  └─ src
+│  │  ├─ RuntimeContext
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ runtime
+│  │  │  │        └─ RuntimeContext
+│  │  │  │           ├─ RuntimeContext.hpp
+│  │  │  │           ├─ RuntimeMode.hpp
+│  │  │  │           └─ RuntimeTypes.hpp
+│  │  │  └─ src
+│  │  ├─ RuntimePhase
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ runtime
+│  │  │  │        └─ RuntimePhase
+│  │  │  │           ├─ RuntimePhase.hpp
+│  │  │  │           ├─ RuntimePhaseConstants.hpp
+│  │  │  │           ├─ RuntimePhaseId.hpp
+│  │  │  │           └─ RuntimePhaseTypes.hpp
+│  │  │  └─ src
+│  │  ├─ RuntimePipeline
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ runtime
+│  │  │  │        └─ RuntimePipeline
+│  │  │  │           └─ RuntimePipeline.hpp
+│  │  │  └─ src
+│  │  └─ TaskGraph
+│  │     ├─ CMakeLists.txt
+│  │     ├─ include
+│  │     │  └─ mmo
+│  │     │     └─ runtime
+│  │     │        └─ TaskGraph
+│  │     │           ├─ TaskDependency.hpp
+│  │     │           ├─ TaskGraph.hpp
+│  │     │           ├─ TaskGraphConstants.hpp
+│  │     │           ├─ TaskGraphTypes.hpp
+│  │     │           └─ TaskNode.hpp
+│  │     └─ src
 │  └─ tests
 │     ├─ CMakeLists.txt
 │     ├─ infrastructure
@@ -253,16 +369,27 @@ mmo_server
 │     │  │  └─ TcpConnectionTests.cpp
 │     │  ├─ lockfree_queue
 │     │  │  ├─ CMakeLists.txt
-│     │  │  ├─ ConsumerStarvationTests.cpp
-│     │  │  ├─ FIFOOrderTests.cpp
-│     │  │  ├─ FalseSharingPressureTests.cpp
-│     │  │  ├─ FullQueueTests.cpp
-│     │  │  ├─ LargePayloadTests.cpp
-│     │  │  ├─ LongDurationStabilityTests.cpp
-│     │  │  ├─ MultiProducerCorrectnessTests.cpp
-│     │  │  ├─ ProducerBurstTests.cpp
-│     │  │  ├─ StressTests.cpp
-│     │  │  └─ WrapAroundTests.cpp
+│     │  │  ├─ MPMC
+│     │  │  │  ├─ MPMCQueueAbiTests.cpp
+│     │  │  │  ├─ MPMCQueueBasicTests.cpp
+│     │  │  │  ├─ MPMCQueueCapacityTests.cpp
+│     │  │  │  ├─ MPMCQueueContentionTests.cpp
+│     │  │  │  ├─ MPMCQueueLargePayloadTests.cpp
+│     │  │  │  ├─ MPMCQueueMultiConsumerTests.cpp
+│     │  │  │  ├─ MPMCQueueMultiProducerTests.cpp
+│     │  │  │  ├─ MPMCQueueStressTests.cpp
+│     │  │  │  └─ MPMCQueueWrapAroundTests.cpp
+│     │  │  └─ MPSC
+│     │  │     ├─ ConsumerStarvationTests.cpp
+│     │  │     ├─ FIFOOrderTests.cpp
+│     │  │     ├─ FalseSharingPressureTests.cpp
+│     │  │     ├─ FullQueueTests.cpp
+│     │  │     ├─ LargePayloadTests.cpp
+│     │  │     ├─ LongDurationStabilityTests.cpp
+│     │  │     ├─ MultiProducerCorrectnessTests.cpp
+│     │  │     ├─ ProducerBurstTests.cpp
+│     │  │     ├─ StressTests.cpp
+│     │  │     └─ WrapAroundTests.cpp
 │     │  ├─ logger
 │     │  │  ├─ CMakeLists.txt
 │     │  │  ├─ LoggerInfrastructureTests.cpp
@@ -282,23 +409,45 @@ mmo_server
 │     │  │  ├─ PacketRoundTripTests.cpp
 │     │  │  ├─ PacketViewTests.cpp
 │     │  │  └─ PacketWriterTests.cpp
-│     │  └─ serialization
-│     │     ├─ BinaryReaderTests.cpp
-│     │     ├─ BinaryWriterTests.cpp
+│     │  ├─ serialization
+│     │  │  ├─ BinaryReaderTests.cpp
+│     │  │  ├─ BinaryWriterTests.cpp
+│     │  │  ├─ CMakeLists.txt
+│     │  │  ├─ PrimitiveSerializationTests.cpp
+│     │  │  ├─ SerializationBoundaryTests.cpp
+│     │  │  ├─ SerializationRoundTripTests.cpp
+│     │  │  ├─ StringSerializationTests.cpp
+│     │  │  └─ TestHelpers.hpp
+│     │  └─ timer
 │     │     ├─ CMakeLists.txt
-│     │     ├─ PrimitiveSerializationTests.cpp
-│     │     ├─ SerializationBoundaryTests.cpp
-│     │     ├─ SerializationRoundTripTests.cpp
-│     │     ├─ StringSerializationTests.cpp
-│     │     └─ TestHelpers.hpp
+│     │     ├─ MultiProducerScheduleTests.cpp
+│     │     ├─ TimerCancellationTests.cpp
+│     │     ├─ TimerPrecisionTests.cpp
+│     │     ├─ TimerQueueOrderTests.cpp
+│     │     └─ TimerStressTests.cpp
 │     └─ runtime
-│        └─ timer
+│        ├─ JobDispatch
+│        ├─ RuntimeContext
+│        │  ├─ CMakeLists.txt
+│        │  ├─ RuntimeContextConstructionTests.cpp
+│        │  ├─ RuntimeContextLayoutTests.cpp
+│        │  ├─ RuntimeModeTests.cpp
+│        │  └─ RuntimeTypeTests.cpp
+│        ├─ RuntimePhase
+│        │  ├─ CMakeLists.txt
+│        │  ├─ RuntimePhaseConstructionTests.cpp
+│        │  ├─ RuntimePhaseIdTests.cpp
+│        │  ├─ RuntimePhaseLayoutTests.cpp
+│        │  └─ RuntimePhaseTypesTests.cpp
+│        ├─ RuntimePipeline
+│        │  ├─ CMakeLists.txt
+│        │  ├─ RuntimePipelineConstantsTests.cpp
+│        │  ├─ RuntimePipelineConstructionTests.cpp
+│        │  ├─ RuntimePipelineInitializationTests.cpp
+│        │  └─ RuntimePipelineLayoutTests.cpp
+│        └─ TaskGraph
 │           ├─ CMakeLists.txt
-│           ├─ MultiProducerScheduleTests.cpp
-│           ├─ TimerCancellationTests.cpp
-│           ├─ TimerPrecisionTests.cpp
-│           ├─ TimerQueueOrderTests.cpp
-│           └─ TimerStressTests.cpp
+│           └─ TaskGraphAbiTests.cpp
 └─ server_gateway
 
 ```

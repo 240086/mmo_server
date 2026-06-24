@@ -1,0 +1,40 @@
+{
+    "name": "Layer2/TaskGraph/architecture.json",
+    "module": "TaskGraph",
+    "overall_goal": "deterministic task dependency graph for runtime execution",
+    "responsibilities": [
+        "task metadata storage",
+        "dependency graph storage",
+        "phase ownership declaration",
+        "deterministic execution ordering"
+    ],
+    "non_responsibilities": [
+        "task execution",
+        "job dispatching",
+        "worker scheduling",
+        "thread management",
+        "scene logic",
+        "entity processing",
+        "combat processing",
+        "network processing"
+    ],
+    "ownership": {
+        "owned_by": "TickScheduler",
+        "constructed_at": "runtime startup",
+        "modified_after_build": false
+    },
+    "threading_model": {
+        "build_thread": "runtime thread",
+        "runtime_access": "read_only"
+    },
+    "graph_type": {
+        "topology": "directed_acyclic_graph",
+        "rebuild_per_tick": false,
+        "deterministic_ordering": true
+    },
+    "future_evolution": [
+        "graph_validation",
+        "dependency_visualization",
+        "graph_metrics"
+    ]
+}

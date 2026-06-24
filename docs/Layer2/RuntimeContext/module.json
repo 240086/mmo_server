@@ -1,0 +1,20 @@
+{
+    "name": "Layer2/RuntimeContext/module.json",
+    "layer": "Layer2",
+    "dependencies": [],
+    "used_by": [
+        "TickScheduler",
+        "RuntimePipeline",
+        "RuntimePhase",
+        "TaskGraph",
+        "JobDispatch",
+        "ActorMailbox"
+    ],
+    "public_headers": [
+        "RuntimeContext.hpp",
+        "RuntimeTypes.hpp",
+        "RuntimeMode.hpp"
+    ],
+    "implementation_files": [],
+    "header_only": true
+}

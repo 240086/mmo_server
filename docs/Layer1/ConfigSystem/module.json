@@ -1,5 +1,5 @@
 {
-    "name": "config_system",
+    "name": "Layer1/configSystem/module.json",
     "layer": "Layer1",
     "dependencies": [],
     "used_by": [
