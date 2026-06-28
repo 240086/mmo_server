@@ -8,43 +8,51 @@
 #include <mutex>
 
 #include <mmo/infrastructure/timer/TimerTask.hpp>
+#include <mmo/infrastructure/timer/IClock.hpp>
 
-namespace mmo::infrastructure::timer {
+namespace mmo::infrastructure::timer
+{
 
-class TimerQueue {
-public:
-  TimerQueue() = default;
-  TimerQueue(const TimerQueue &) = delete;
-  TimerQueue &operator=(const TimerQueue &) = delete;
+  class TimerQueue
+  {
+  public:
+    explicit TimerQueue(IClock &clock);
 
-public:
-  [[nodiscard]]
-  TimerId Schedule(Duration delay, TimerCallback callback);
+    TimerQueue() = delete;
+    TimerQueue(const TimerQueue &) = delete;
+    TimerQueue &operator=(const TimerQueue &) = delete;
 
-  [[nodiscard]]
-  bool Cancel(TimerId timerId);
+  public:
+    [[nodiscard]]
+    TimerId Schedule(Duration delay, TimerCallback callback);
 
-  void Tick(TimePoint now);
+    [[nodiscard]]
+    bool Cancel(TimerId timerId);
 
-  [[nodiscard]]
-  std::size_t Size() const noexcept;
+    void Tick(TimePoint now);
 
-private:
-  void DispatchExpired(TimePoint now);
+    [[nodiscard]]
+    std::size_t Size() const noexcept;
 
-  [[nodiscard]]
-  bool IsCancelled(TimerId timerId) const;
+  private:
+    void DispatchExpired(TimePoint now);
 
-private:
-  std::priority_queue<TimerTask, std::vector<TimerTask>, std::greater<>> tasks_;
+    [[nodiscard]]
+    bool IsCancelled(TimerId timerId) const;
 
-  std::unordered_set<TimerId> cancelledTimers_;
+  private:
+    std::priority_queue<TimerTask, std::vector<TimerTask>, std::greater<>> tasks_;
 
-  std::atomic<TimerId> nextId_{1};
+    std::unordered_set<TimerId> cancelledTimers_;
 
-  mutable std::mutex mutex_;
+    std::atomic<TimerId> nextId_{1};
 
-  TimerSequence nextSequence_{0};
-};
+    mutable std::mutex mutex_;
+
+    std::atomic<TimerSequence>
+        nextSequence_{0};
+
+    IClock &m_clock;
+  };
 
 } // namespace mmo::infrastructure::timer

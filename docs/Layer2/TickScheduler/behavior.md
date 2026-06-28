@@ -75,8 +75,6 @@ Advance Tick
 
 TickId increases by exactly one.
 
-FrameIndex increases by exactly one.
-
 DeltaTime remains constant.
 
 ------------------------------------------------

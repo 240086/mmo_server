@@ -1,18 +1,17 @@
-docs/Layer2/TickScheduler/interface_contract.md
-Design Goal
+# TickScheduler Interface Contract
 
-TickScheduler is the deterministic runtime driver.
+## Design Goal
 
-Responsibilities:
+TickScheduler is the deterministic runtime driver of Layer2.
 
-runtime lifecycle control
-tick progression
-RuntimeContext update
-RuntimePipeline invocation
-timer integration
-tick synchronization
+TickScheduler is responsible for:
 
-TickScheduler owns runtime execution.
+* runtime lifecycle progression
+* tick progression
+* RuntimeContext update
+* TimerQueue advancement
+* RuntimePipeline invocation
+* tick completion coordination
 
 TickScheduler does not execute gameplay logic.
 
@@ -20,37 +19,54 @@ TickScheduler does not execute task graph logic.
 
 TickScheduler does not manage worker threads.
 
-Ownership Model
+TickScheduler is the single authoritative runtime clock.
+
+---
+
+# Ownership Model
+
 Runtime
 
 └── TickScheduler
-        │
-        ├── RuntimeContext
-        │
-        ├── RuntimePipeline
-        │
-        ├── TimerQueue
-        │
-        └── IClock
+│
+├── RuntimeContext
+│
+├── RuntimePipeline
+│
+├── TimerQueue
+│
+└── IClock
 
 Owned Objects:
 
-RuntimeContext
-RuntimePipeline reference
-TimerQueue reference
-IClock reference
+* RuntimeContext
+
+Referenced Objects:
+
+* RuntimePipeline
+* TimerQueue
+* IClock
 
 Not Owned:
 
-Scene
-Entity
-AOI
-Combat
-Skill
-AI
-RPC
-Public Interface
-ITickScheduler
+* Scene
+* Entity
+* AOI
+* Movement
+* Combat
+* Skill
+* AI
+* RPC
+* JobDispatch
+* WorkerPool
+
+---
+
+# Public Interface
+
+## ITickScheduler
+
+```cpp
 class ITickScheduler
 {
 public:
@@ -66,17 +82,37 @@ public:
     virtual void RunUntilStopped() = 0;
 
     [[nodiscard]]
-    virtual bool IsRunning() const noexcept = 0;
+    virtual bool IsInitialized() const noexcept = 0;
 
     [[nodiscard]]
     virtual const RuntimeContext&
     GetRuntimeContext() const noexcept = 0;
 };
-Lifecycle Contract
+```
+
+---
+
+# Lifecycle Contract
+
+State Machine
+
+Created
+
+↓
+
+Initialized
+
+↓
+
+Running
+
+↓
+
+Stopped
 
 Initialization:
 
-Constructed
+Created
 
 ↓
 
@@ -84,11 +120,16 @@ Initialize()
 
 ↓
 
-Running
+Initialized
+
+After initialization:
+
+* RunOneTick() is allowed
+* RunUntilStopped() is allowed
 
 Shutdown:
 
-Running
+Initialized/Running
 
 ↓
 
@@ -104,11 +145,17 @@ RunOneTick()
 
 must fail fast.
 
-Tick Execution Contract
+---
 
-Single Tick:
+# Tick Execution Contract
 
-Update RuntimeContext
+Single Tick Execution
+
+Tick N
+
+↓
+
+Update RuntimeContext(Tick=N)
 
 ↓
 
@@ -120,17 +167,25 @@ Execute RuntimePipeline
 
 ↓
 
-Frame Complete
+Commit Tick Completion
 
 ↓
 
-TickId++
+TickId = N + 1
 
 Execution order is fixed.
 
-Must never change between runs.
+Execution order must never change between runs.
 
-RuntimeContext Contract
+No retries.
+
+No partial execution.
+
+No reordering.
+
+---
+
+# RuntimeContext Contract
 
 TickScheduler is the only writer.
 
@@ -140,23 +195,36 @@ Runtime Thread
 
 RuntimeContext
 
-Worker threads:
+Worker Threads:
 
 Read Only
 
 Modification outside TickScheduler is forbidden.
 
-Timer Integration Contract
+RuntimeContext fields visible during Tick N:
+
+* TickId
+* DeltaTime
+* RuntimeMode
+* WorkerCount
+
+All fields remain immutable during Tick execution.
+
+---
+
+# Timer Integration Contract
 
 Before pipeline execution:
 
-TimerQueue.Tick(now)
+```cpp
+timerQueue.Tick(now);
+```
 
-must execute.
+must execute exactly once.
 
 Order:
 
-Update Context
+Update RuntimeContext
 
 ↓
 
@@ -168,27 +236,33 @@ Pipeline Execute
 
 Reason:
 
-timer-triggered tasks become visible within same tick.
+timer-triggered work becomes visible within the same tick.
 
-RuntimePipeline Contract
+---
+
+# RuntimePipeline Contract
 
 TickScheduler invokes:
 
+```cpp
 pipeline.Execute(context);
+```
 
-Exactly once per tick.
+exactly once per tick.
 
 No retries.
 
-No reordering.
-
 No partial execution.
+
+No reordering.
 
 Pipeline failure is fatal.
 
-Determinism Rules
+---
 
-TickScheduler must guarantee:
+# Determinism Rules
+
+TickScheduler guarantees:
 
 TickId:
 
@@ -200,64 +274,64 @@ TickId:
 
 strict monotonic progression.
 
-FrameIndex:
-
-0
-1
-2
-3
-...
-
-strict monotonic progression.
-
 DeltaTime:
 
-fixed during tick.
+constant during tick execution.
 
 RuntimeMode:
 
 immutable during tick execution.
 
-Execution order:
+Pipeline execution order:
 
 identical between runs.
 
-Threading Rules
+Phase order:
+
+Input
+→ Simulation
+→ PostSimulation
+→ Output
+
+must remain fixed.
+
+---
+
+# Threading Rules
 
 V1:
 
-Runtime Thread
-
-only.
+Single Runtime Thread
 
 Allowed:
 
-Initialize()
-RunOneTick()
-RunUntilStopped()
-Shutdown()
+* Initialize()
+* RunOneTick()
+* RunUntilStopped()
+* Shutdown()
 
-from runtime thread.
+from runtime thread only.
 
 Forbidden:
 
-multiple concurrent callers.
+* concurrent invocation
+* multiple runtime threads
+* external RuntimeContext mutation
 
-Failure Philosophy
+---
+
+# Failure Philosophy
 
 Runtime is fail-fast.
 
 Invalid state:
 
-double initialize
-
-run after shutdown
-
-null pipeline
-
-null clock
-
-context corruption
+* double initialize
+* run after shutdown
+* null pipeline
+* null clock
+* null timer queue
+* runtime context corruption
 
 must terminate execution.
 
@@ -265,24 +339,22 @@ No recovery.
 
 No silent fallback.
 
-Future Evolution Boundary
+---
+
+# Future Evolution Boundary
 
 Allowed:
 
-adaptive tick pacing
-
-distributed scheduler
-
-cross-node synchronization
-
-fiber runtime
-
-multi-scene scheduler
+* adaptive tick pacing
+* distributed scheduler
+* cross-node synchronization
+* fiber runtime
+* multi-scene scheduler
+* catch-up policy
 
 Forbidden in V1:
 
-dynamic phase ordering
-
-variable execution order
-
-runtime graph mutation during tick
+* dynamic phase ordering
+* variable execution order
+* runtime graph mutation during tick
+* multiple tick writers

@@ -97,6 +97,15 @@ mmo_server
 │  │  │  ├─ interface_contract.md
 │  │  │  ├─ internal_design.md
 │  │  │  └─ state.json
+│  │  ├─ RuntimePipelineExecutor
+│  │  │  ├─ RuntimePipelineExecutor_CPP_Design.md
+│  │  │  ├─ RuntimePipelineExecutor_Design.md
+│  │  │  ├─ RuntimePipelineExecutor_Test_Design.md
+│  │  │  ├─ architecture.json
+│  │  │  ├─ behavior.md
+│  │  │  ├─ interface_contract.md
+│  │  │  ├─ internal_design.md
+│  │  │  └─ state.json
 │  │  ├─ TaskGraph
 │  │  │  ├─ architecture.json
 │  │  │  ├─ behavior.md
@@ -105,6 +114,7 @@ mmo_server
 │  │  │  ├─ module.json
 │  │  │  └─ state.json
 │  │  ├─ TickScheduler
+│  │  │  ├─ TickScheduler_CPP_Design.md
 │  │  │  ├─ architecture.json
 │  │  │  ├─ behavior.md
 │  │  │  ├─ freeze_report.md
@@ -329,18 +339,42 @@ mmo_server
 │  │  │  │        └─ RuntimePipeline
 │  │  │  │           └─ RuntimePipeline.hpp
 │  │  │  └─ src
-│  │  └─ TaskGraph
+│  │  ├─ RuntimePipelineExecutor
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ runtime
+│  │  │  │        └─ RuntimePipelineExecutor
+│  │  │  │           ├─ IRuntimePipelineExecutor.hpp
+│  │  │  │           ├─ RuntimePipelineExecutor.hpp
+│  │  │  │           ├─ RuntimePipelineExecutorConfig.hpp
+│  │  │  │           └─ RuntimePipelineExecutorTypes.hpp
+│  │  │  └─ src
+│  │  │     └─ RuntimePipelineExecutor.cpp
+│  │  ├─ TaskGraph
+│  │  │  ├─ CMakeLists.txt
+│  │  │  ├─ include
+│  │  │  │  └─ mmo
+│  │  │  │     └─ runtime
+│  │  │  │        └─ TaskGraph
+│  │  │  │           ├─ TaskDependency.hpp
+│  │  │  │           ├─ TaskGraph.hpp
+│  │  │  │           ├─ TaskGraphConstants.hpp
+│  │  │  │           ├─ TaskGraphTypes.hpp
+│  │  │  │           └─ TaskNode.hpp
+│  │  │  └─ src
+│  │  └─ TickScheduler
 │  │     ├─ CMakeLists.txt
 │  │     ├─ include
 │  │     │  └─ mmo
 │  │     │     └─ runtime
-│  │     │        └─ TaskGraph
-│  │     │           ├─ TaskDependency.hpp
-│  │     │           ├─ TaskGraph.hpp
-│  │     │           ├─ TaskGraphConstants.hpp
-│  │     │           ├─ TaskGraphTypes.hpp
-│  │     │           └─ TaskNode.hpp
+│  │     │        └─ TickScheduler
+│  │     │           ├─ ITickScheduler.hpp
+│  │     │           ├─ TickScheduler.hpp
+│  │     │           ├─ TickSchedulerConfig.hpp
+│  │     │           └─ TickSchedulerTypes.hpp
 │  │     └─ src
+│  │        └─ TickScheduler.cpp
 │  └─ tests
 │     ├─ CMakeLists.txt
 │     ├─ infrastructure
@@ -431,6 +465,7 @@ mmo_server
 │     └─ runtime
 │        ├─ JobDispatch
 │        │  ├─ CMakeLists.txt
+│        │  ├─ JobDispatchStressTests.cpp
 │        │  ├─ JobDispatchTestCommon.hpp
 │        │  ├─ JobDispatchTests.cpp
 │        │  ├─ TaskRegistryTests.cpp
@@ -453,9 +488,24 @@ mmo_server
 │        │  ├─ RuntimePipelineConstructionTests.cpp
 │        │  ├─ RuntimePipelineInitializationTests.cpp
 │        │  └─ RuntimePipelineLayoutTests.cpp
-│        └─ TaskGraph
+│        ├─ RuntimePipelineExecutor
+│        │  ├─ CMakeLists.txt
+│        │  ├─ RuntimePipelineExecutorConstructionTests.cpp
+│        │  └─ RuntimePipelineExecutorTestCommon.hpp
+│        ├─ TaskGraph
+│        │  ├─ CMakeLists.txt
+│        │  └─ TaskGraphAbiTests.cpp
+│        └─ TickScheduler
 │           ├─ CMakeLists.txt
-│           └─ TaskGraphAbiTests.cpp
+│           ├─ TickSchedulerConstructionTests.cpp
+│           ├─ TickSchedulerContextTests.cpp
+│           ├─ TickSchedulerDeterminismTests.cpp
+│           ├─ TickSchedulerFailureTests.cpp
+│           ├─ TickSchedulerLifecycleTests.cpp
+│           ├─ TickSchedulerStressTests.cpp
+│           ├─ TickSchedulerTestCommon.hpp
+│           ├─ TickSchedulerTickTests.cpp
+│           └─ TickSchedulerTimerTests.cpp
 └─ server_gateway
 
 ```

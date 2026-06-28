@@ -2,35 +2,40 @@
 
 #include <mmo/infrastructure/timer/TimerTypes.hpp>
 
-namespace mmo::infrastructure::timer {
+namespace mmo::infrastructure::timer
+{
 
-enum class TimerState : std::uint8_t {
-  Created,
-  Scheduled,
-  Cancelled,
-  Executing,
-  Completed
-};
+  enum class TimerState : std::uint8_t
+  {
+    Created,
+    Scheduled,
+    Cancelled,
+    Executing,
+    Completed
+  };
 
-struct TimerTask {
-  TimerId id{0};
+  struct TimerTask
+  {
+    TimerId id{0};
 
-  TimePoint deadline{};
+    TimePoint deadline{};
 
-  std::uint64_t sequence{0};
+    std::uint64_t sequence{0};
 
-  TimerCallback callback{};
+    TimerCallback callback{};
 
-  TimerState state{TimerState::Created};
+    TimerState state{TimerState::Created};
 
-  [[nodiscard]]
-  bool operator>(const TimerTask &other) const noexcept {
-    if (deadline != other.deadline) {
-      return deadline > other.deadline;
+    [[nodiscard]]
+    bool operator>(const TimerTask &other) const noexcept
+    {
+      if (deadline != other.deadline)
+      {
+        return deadline > other.deadline;
+      }
+
+      return sequence > other.sequence;
     }
-
-    return sequence > other.sequence;
-  }
-};
+  };
 
 } // namespace mmo::infrastructure::timer

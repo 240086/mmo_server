@@ -25,6 +25,28 @@ while(running)
     AdvanceTick();
 }
 
+Tick N
+
+↓
+
+Update RuntimeContext(Tick=N)
+
+↓
+
+Process TimerQueue
+
+↓
+
+Execute RuntimePipeline
+
+↓
+
+Commit Tick Completion
+
+↓
+
+TickId = N + 1
+
 ------------------------------------------------
 
 # Timing Model
@@ -56,8 +78,6 @@ RuntimeContext
 Stores:
 
 TickId
-
-FrameIndex
 
 DeltaTime
 

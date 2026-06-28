@@ -8,8 +8,6 @@ namespace mmo::runtime
 
     using TickId = std::uint64_t;
 
-    using FrameIndex = std::uint64_t;
-
     using TickDurationMs = std::uint32_t;
 
     using WorkerCount = std::uint32_t;

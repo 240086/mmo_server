@@ -7,12 +7,16 @@ add_subdirectory(RuntimePhase)
 add_subdirectory(RuntimePipeline)
 add_subdirectory(TaskGraph)
 add_subdirectory(JobDispatch)
+add_subdirectory(TickScheduler)
+add_subdirectory(RuntimePipelineExecutor)
 
 # 汇聚成对外的统一运行时骨架公共接口库
 add_library(mmo_runtime INTERFACE)
 
 target_link_libraries(mmo_runtime
     INTERFACE
+    mmo_runtime_pipeline_executor
+    mmo_runtime_tick_scheduler
     mmo_runtime_job_dispatch
     mmo_runtime_context
     mmo_runtime_phase

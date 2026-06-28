@@ -11,8 +11,6 @@ namespace mmo::runtime
     {
         TickId tickId{0};
 
-        FrameIndex frameIndex{0};
-
         TickDurationMs deltaTimeMs{0};
 
         RuntimeMode mode{RuntimeMode::Initializing};

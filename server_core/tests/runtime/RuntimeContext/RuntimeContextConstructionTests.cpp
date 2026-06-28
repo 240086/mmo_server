@@ -10,7 +10,7 @@ TEST(RuntimeContextConstructionTests, DefaultConstruction)
 
     EXPECT_EQ(context.tickId, 0u);
 
-    EXPECT_EQ(context.frameIndex, 0u);
+    // EXPECT_EQ(context.frameIndex, 0u);
 
     EXPECT_EQ(context.deltaTimeMs, 0u);
 
@@ -27,14 +27,13 @@ TEST(RuntimeContextConstructionTests, AggregateInitialization)
 {
     RuntimeContext context{
         100,
-        200,
         33,
         RuntimeMode::Running,
         8};
 
     EXPECT_EQ(context.tickId, 100u);
 
-    EXPECT_EQ(context.frameIndex, 200u);
+    // EXPECT_EQ(context.frameIndex, 200u);
 
     EXPECT_EQ(context.deltaTimeMs, 33u);
 

@@ -3,14 +3,16 @@
 
 #include <mmo/infrastructure/timer/TimerTypes.hpp>
 
-namespace mmo::infrastructure::timer {
+namespace mmo::infrastructure::timer
+{
 
-class IClock {
-public:
-  virtual ~IClock() = default;
+  class IClock
+  {
+  public:
+    virtual ~IClock() = default;
 
-  [[nodiscard]]
-  virtual TimePoint Now() const noexcept = 0;
-};
+    [[nodiscard]]
+    virtual TimePoint Now() const noexcept = 0;
+  };
 
 } // namespace mmo::infrastructure::timer

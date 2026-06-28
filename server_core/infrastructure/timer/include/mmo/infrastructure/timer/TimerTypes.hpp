@@ -5,20 +5,23 @@
 #include <cstdint>
 #include <functional>
 
-namespace mmo::infrastructure::timer {
+namespace mmo::infrastructure::timer
+{
 
-using Clock = std::chrono::steady_clock;
+    using Clock = std::chrono::steady_clock;
 
-using TimePoint = Clock::time_point;
+    using TimePoint = Clock::time_point;
 
-using Duration = std::chrono::milliseconds;
+    using Duration = std::chrono::milliseconds;
 
-using Nanoseconds = std::chrono::nanoseconds;
+    using Nanoseconds = std::chrono::nanoseconds;
 
-using TimerId = std::uint64_t;
+    using TimerId = std::uint64_t;
 
-using TimerSequence = std::uint64_t;
+    using TimerSequence = std::uint64_t;
 
-using TimerCallback = std::function<void()>;
+    using TimerCallback = std::function<void()>;
+
+    inline constexpr TimerId InvalidTimerId = 0;
 
 } // namespace mmo::infrastructure::timer

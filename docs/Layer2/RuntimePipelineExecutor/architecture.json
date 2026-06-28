@@ -1,0 +1,60 @@
+{
+    "name": "Layer2/RuntimePipelineExecutor/architecture.json",
+    "module": "RuntimePipelineExecutor",
+    "layer": "Layer2",
+    "purpose": "Deterministic runtime pipeline execution coordinator.",
+    "threading_model": {
+        "pipeline_execution": "single_thread",
+        "task_execution": "worker_pool",
+        "completion_processing": "runtime_thread"
+    },
+    "responsibilities": [
+        "Execute RuntimePipeline",
+        "Execute RuntimePhase sequentially",
+        "Coordinate TaskGraph scheduling",
+        "Submit tasks to JobDispatch",
+        "Wait for phase completion",
+        "Maintain deterministic execution"
+    ],
+    "owns": [],
+    "references": [
+        "RuntimePipeline",
+        "RuntimeContext",
+        "IJobDispatch",
+        "TaskGraph"
+    ],
+    "determinism": {
+        "phase_order": true,
+        "task_dependency_order": true,
+        "same_tick_execution": true,
+        "single_pipeline_per_tick": true,
+        "parallel_phase_execution": false
+    },
+    "memory": {
+        "dynamic_allocation_per_tick": false,
+        "ownership": "reference_only"
+    },
+    "performance": {
+        "pipeline_iteration": "O(P)",
+        "phase_execution": "O(V+E)",
+        "task_dispatch": "O(R)"
+    },
+    "dependencies": {
+        "lower_layer": [
+            "RuntimePipeline",
+            "RuntimeContext",
+            "TaskGraph",
+            "JobDispatch"
+        ],
+        "upper_layer": [
+            "TickScheduler"
+        ]
+    },
+    "future_extensions": [
+        "ProfilerHook",
+        "MetricsHook",
+        "TracingHook",
+        "CoroutineScheduler",
+        "ECSExecutionBackend"
+    ]
+}

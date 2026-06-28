@@ -11,10 +11,10 @@ TEST(RuntimeTypeTests, TickIdShouldBeUint64)
     EXPECT_TRUE((std::is_same_v<TickId, std::uint64_t>));
 }
 
-TEST(RuntimeTypeTests, FrameIndexShouldBeUint64)
-{
-    EXPECT_TRUE((std::is_same_v<FrameIndex, std::uint64_t>));
-}
+// TEST(RuntimeTypeTests, FrameIndexShouldBeUint64)
+// {
+//     EXPECT_TRUE((std::is_same_v<FrameIndex, std::uint64_t>));
+// }
 
 TEST(RuntimeTypeTests, TickDurationShouldBeUint32)
 {

@@ -1,4 +1,3 @@
-1. Internal Data Structures
 # Internal Data Structures
 
 TimerQueue internally uses:
